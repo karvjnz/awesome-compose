@@ -1,0 +1,31 @@
+1. What is Golang (Go)?
+========================
+Go (Golang) is an open-source programming language created by Google engineers Robert Griesemer, Rob Pike, and Ken Thompson.
+
+Its primary goals were:
+
+➔ Simplicity
+➔ High performance
+➔ Concurrency (handling many requests simultaneously)
+➔ Fast compilation
+➔ Cloud-native development
+
+Think of Go as:
+Easy like Python, Fast like C/C++, Built for cloud applications
+
+Why was Go created?
+====================
+Google had problems with: Huge codebases, Long compile times, Massive distributed systems
+They wanted a language that: Builds quickly, Uses fewer resources, Runs efficiently, Handles thousands of concurrent requests. Thus "Go" was born.
+
+2. Who uses Go?
+================
+Many cloud-native and DevOps tools are written in Go.
+Examples: Docker, Kubernetes, Terraform, Premetheus, Helm, Vault, Consul all these are written in Go.
+
+3. Why is Go popular in Cloud and Microservices?
+================================================
+Suppose 10,000 users hit your application. Go uses lightweight threads called: Goroutines, instead of expensive OS threads.
+This allows: High throughput, Low memory usage, and Fast response times
+That's why Go is common for: APIs, Microservices, Cloud platforms, DevOps tools and Networking software
+
