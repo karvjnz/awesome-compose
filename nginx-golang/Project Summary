@@ -1,0 +1,163 @@
+What is this project doing?
+===========================
+This project is mostly a demonstration of: Docker + Nginx + Go working together
+Purpose: Learn how to containerize a Go web application and place Nginx in front of it as a reverse proxy.
+"How a reverse proxy (Nginx) forwards requests to a backend service written in Go running inside a Docker container."
+
+Your architecture is:
+=========================
+Browser
+   |
+   | Port 80
+   v
++---------+
+|  NGINX  |
++---------+
+     |
+     |
+     v
++---------+
+| Go App  |
+| Backend |
++---------+
+
+So:
+➔ User opens browser
+➔ Request reaches Nginx
+➔ Nginx forwards request to Go backend
+➔ Go backend responds
+
+
+What is go.mod?
+===============
+Think of: go.mod as Go's equivalent of:
+
+➔ package.json (Node.js)
+➔ pom.xml (Maven)
+➔ requirements.txt (Python)
+
+It defines:
+➔ Project name
+➔ Go version
+➔ Dependencies
+
+What is go.sum?
+===============
+Think of: "go.sum" as the lock file.
+
+Equivalent to:
+package-lock.json
+yarn.lock
+Pipfile.lock
+
+It stores:
+Exact dependency versions
+Checksums
+Integrity verification
+
+Example:
+chi/v5 v5.0.10
+checksum abc123...
+
+This ensures:
+My machine
+Your machine
+CI/CD server
+Docker build
+
+all download the exact same package.
+
+Why do we need both?
+==================
+go.mod
+Declares: What dependencies are required
+Example: require github.com/go-chi/chi/v5
+
+go.sum
+Records:
+Exactly which version was installed and verifies integrity
+
+What is Docker doing here?
+============================
+Your Compose file:
+
+services:
+  proxy:
+    image: nginx
+
+➔ Creates: NGINX Container
+
+backend:
+  build:
+    context: backend
+
+➔ Creates: Go Backend Container
+
+Architecture:
+==============
+
+                    Browser
+                       |
+                       v
+               +---------------+
+               | NGINX Proxy   |
+               | Port 80       |
+               +---------------+
+                       |
+                       v
+               +---------------+
+               | Go Backend    |
+               | Port 80       |
+               +---------------+
+
+Why introduce Nginx if Go already serves HTTP?
+================================================
+
+Because in real systems Nginx often handles:
+
+➔ Reverse proxy
+➔ SSL/TLS termination
+➔ Load balancing
+➔ Compression
+➔ Caching
+➔ Routing
+
+Example:
+=======
+Internet
+   |
+   v
+NGINX
+   |
+   +----> Go App 1
+   |
+   +----> Go App 2
+   |
+   +----> Go App 3
+
+So this project is teaching the same architecture pattern you saw with Node.js:
+
+Client
+  |
+  v
+Reverse Proxy (NGINX)
+  |
+  v
+Application Server (Go)
+
+==============================================================
+Technologies:
+=============================================================
+NGINX      -> Reverse Proxy
+Go         -> Backend Application
+Chi Router -> HTTP Routing Framework
+Docker     -> Containerization
+Docker Compose -> Multi-container orchestration
+
+Files:
+
+main.go  -> Application code
+go.mod   -> Dependency definitions
+go.sum   -> Dependency lock/checksum file
+Dockerfile -> Builds Go container
+docker-compose.yml -> Runs Nginx + Go together
