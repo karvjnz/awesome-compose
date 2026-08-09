@@ -1,4 +1,4 @@
-# What is this project doing?
+What is this project doing?
 =============================
 This project is mostly a demonstration of: Docker + Nginx + Go working together
 Purpose: Learn how to containerize a Go web application and place Nginx in front of it as a reverse proxy.
